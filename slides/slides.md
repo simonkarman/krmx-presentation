@@ -88,7 +88,7 @@ How well do multiplayer games align with development best practices?
 | Eventual Consistency | ❌ Realtime                      |
 
 <div v-click class="mt-10 text-2xl">
-  <b>Conclusion</b>: creating an multiplayer board game is complex!
+  <b>Conclusion</b>: creating an online multiplayer board game is complex!
 </div>
 
 ---
@@ -120,19 +120,42 @@ This page is hidden as the iframe takes up the whole page.
 
 ---
 
+<img class="float-right max-w-2/5 ml-5 -m-t-4" alt="Krmx" src="assets/krmx.png" />
+
 # Krmx Implementation
-krmx = (event emitter + redux) + websockets networking
+What is Krmx in its core?
+
+- Server
+- Client
+- Event Emitter
+- Store state at server
+- WebSockets for realtime updates
+
+---
+ 
+# Krmx Protocol
+Event Emitter at its core.
+
+<img class="max-w-2/3" alt="Krmx" src="assets/krmx-eventemitter.png" />
 
 ---
 
- 
-# Krmx Events 
-events emitted and example of krmx on client side and server side
+# Krmx Protocol - Events
+It's all just events
+
+```json5 {1|2|3|4|all}
+{ type: string, payload: object }
+{ type: "user/joined", payload: { username: "simon" } }
+{ type: "user/linked", payload: { username: "simon" } }
+{ type: "custom/create-spawned", payload: { class: "dragon", power: 10 } }
+```
 
 ---
 
 # Customization
-middleware/ layers to add functionality
+Use middleware to add your own functionality.
+
+<img class="max-w-2/5" alt="Krmx" src="assets/krmx-middleware.png" />
 
 ---
 layout: iframe
@@ -145,12 +168,24 @@ This page is hidden as the iframe takes up the whole page.
 ---
 
 # Live Coding!
-manipulate some stuff to build a cool new feature
+Let's build a simple Krmx Server and Client setup.
+
+- Krmx is a Protocol
+- Reference implementation of client and server provided
+- TypeScript
+- React / Redux
 
 ---
 
 # Thanks! Questions?
+That's it!
 
-Want to play some more hexlines? Join at: http://hexlines.simonkarman.com:3000/
+<div class="float-right w-48">
+  <img alt="Simon Karman" src="assets/simonkarman.png" />
+  <p class="text-center">Simon Karman</p>
+  <p class="text-center">simon.karman@xebia.com</p>
+</div>
 
-> Note: only 6 players can participate, be quick!
+<p class="max-w-2/3">
+  If you would like to play hexlines, you can join at: <a target="_blank" href="http://hexlines.simonkarman.com:3000/">http://hexlines.simonkarman.com:3000/</a> (Note: only 6 players can participate, be quick!)
+</p>
