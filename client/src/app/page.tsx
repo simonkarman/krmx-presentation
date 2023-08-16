@@ -17,7 +17,21 @@ export default function MyApp() {
   );
 }
 function MyComponent() {
-  const { } = useKrmx();
+  const { isConnected, link, isLinked, username, rejectionReason, send } = useKrmx();
+  if (!isConnected) {
+    return <p>You're not connected!</p>
+  }
+
+  if (!isLinked) {
+    return <><button onClick={() => link('simon')}>
+      Join as Simon! - {rejectionReason}
+    </button><button onClick={() => link('tibor')}>
+      Join as Tibor! - {rejectionReason}
+    </button></>;
+  }
+
   return <>
-  </>;
+    <h1>Welcome, {username}</h1>
+    <button onClick={() => send({ type: 'custom/my-message', payload: {}})}>Send a message</button>
+  </>
 }

@@ -189,3 +189,20 @@ That's it!
 <p class="max-w-2/3">
   If you would like to play hexlines, you can join at: <a target="_blank" href="http://hexlines.simonkarman.com:3000/">http://hexlines.simonkarman.com:3000/</a> (Note: only 6 players can participate, be quick!)
 </p>
+
+
+
+---
+
+# Feedback from Dry run
+Upcoming features
+Motivations / Big Lessons (look at other libraries, testing, merge Complexity slides) - Complexity slides: eventual consistency and async
+Krmx Protocol Diagram in steps and flip it
+Show npm install commands
+Mentioned that: Programming is far away from the demo
+Demo of hexlines more at the end
+Behind the scenes of hexlines
+
+Charge Macbook + do not distrub
+Don't make changes before demo
+Timer on table
