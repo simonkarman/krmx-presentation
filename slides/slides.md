@@ -1,7 +1,7 @@
 ---
 theme: ./presentation-templates/slidev-theme-xebia
 highlighter: shiki
-lineNumbers: true
+lineNumbers: false
 drawings:
   persist: false
 transition: slide-up
@@ -9,44 +9,29 @@ title: Krmx
 ---
 
 # WebSockets for Turn-Based Multiplayer Games
-24th of  August 2023
+24th of August 2023 @ AdvancedJS Meetup
 
-Simon Karman @ AdvancedJS meetup AMS
+Simon Karman (www.simonkarman.nl)
+
+<div class="w-24">
+  <img alt="Simon Karman" src="assets/simonkarman.png" />
+</div>
+
+💼 Xebia -- 🕹 Boardgames -- 🌎 Multiplayer
 
 <style>
 .slidev-layout.cover h1 {
+    margin-top: 4rem;
     max-width: 20rem;
     font-size: 1.5rem;
 }
 </style>
 
 <!--
+Verify: Clock in sight or timer on table!
+
 Live coding of a simple turn-based game using a TypeScript NodeJS backend and a Typescript React frontend using the krmx library. Krmx is a custom WebSocket protocol specifically build for user-based applications such as turn based games with NodeJS backends and React frontends.
--->
 
----
-
-# Who am I?
-
-<div class="float-right w-48">
-  <img alt="Simon Karman" src="assets/simonkarman.png" />
-  <p class="text-center">Simon Karman</p>
-</div>
-
-💼 Cloud Consultant @ Xebia Cloud
-
--- 
-
-🕹️ Hobbyist Game Developer
-- Since primary school
-- Making > Playing
-- Board games
-
---
-
-🌎 Building a multiplayer board game
-
-<!--
 I work at Xebia as a Cloud Consultant. In my free time I'm a hobbyist game developer. I love boardgames and especially making them. Since I was a kid. During covid trying to combine cloud/internet with games. Resulted in some multiplayer games for a group of friends (b11 party) which was 'Mario Party'-ish.
 -->
 
@@ -57,13 +42,13 @@ Let's start at the basis. What is a board game?
 
 - Table and Players
 - Players can look at the board state on the table (cards, pieces, dice, ect...)
-- Players can take actions asynchronously
-- Players have imperfect information of the board state
+- In some games, players have imperfect information of the board state
+- Players can take actions
 
 <img class="max-w-full mt-10" src="assets/boardgame.png" />
 
 ---
-clicks: 4
+clicks: 8
 ---
 
 # Online multiplayer game
@@ -73,21 +58,14 @@ A board game over the internet!
 <div v-if="$slidev.nav.clicks === 1"><img class="max-w-full mt-10" src="assets/boardgame-multiplayer-1.png" /></div>
 <div v-if="$slidev.nav.clicks === 2"><img class="max-w-full mt-10" src="assets/boardgame-multiplayer-2.png" /></div>
 <div v-if="$slidev.nav.clicks === 3"><img class="max-w-full mt-10" src="assets/boardgame-multiplayer-3.png" /></div>
-<div v-if="$slidev.nav.clicks === 4"><img class="max-w-full mt-10" src="assets/boardgame-multiplayer-4.png" /></div>
+<div v-if="$slidev.nav.clicks >= 4"><img class="max-w-full mt-10" src="assets/boardgame-multiplayer-4.png" /></div>
 
----
-
-# Software Complexity
-How well do multiplayer games align with development best practices?
-
-| **Best Practice**    | **What we need**                |
-|----------------------|---------------------------------|
-| Co-located System    | ❌ Distributed System            |
-| Stateless            | ❌ Stateful (hidden information) |
-| Synchronous          | ❌ Asynchronous                  |
-| Eventual Consistency | ❌ Realtime                      |
-
-<div v-click class="mt-10 text-2xl">
+<div class="flex gap-8 w-full justify-center">
+  <p v-if="$slidev.nav.clicks >= 5" class="">❌ Co-located System</p>            
+  <p v-if="$slidev.nav.clicks >= 6" class="">❌ Stateless</p> 
+  <p v-if="$slidev.nav.clicks >= 7" class="">❌ Synchronous</p>
+</div>
+<div v-if="$slidev.nav.clicks >= 8" class="-mt-4 text-xl text-center w-full">
   <b>Conclusion</b>: creating an online multiplayer board game is complex!
 </div>
 
@@ -98,17 +76,29 @@ How well do multiplayer games align with development best practices?
 # Krmx
 A network protocol for realtime multi-user interactions.
 
+<v-clicks class="text-md">
 
-<v-clicks>
-
-- Distributed System ✅: Uses a clients and server architecture out of the box
-- Stateful ✅: Keeps track of all-knowing state (server) and per player state (client)
-- Asynchronous ✅: Allows users to interact over time
+- Distributed System ✅: A clients and server architecture
+- Stateful ✅: Keeps track of all state at the server and (partial) state on the client
 - Realtime ✅: Informs users in realtime via WebSockets
-
-- Warning ⚠️: Created by me
+- Asynchronous ✅: Allows users to interact over time using a persisted session
+- Easy API ✅: Clear and concise API specification on both client and server side
+- Automated Tests ✅: Test coverage (100%) on 65 different scenarios
 
 </v-clicks>
+<v-clicks class="text-md">
+
+<div class="mt-4 text-lg w-full text-center">
+
+🚨 Disclaimer: Krmx is a pet project by me❗ Why?
+ 
+</div>
+
+</v-clicks>
+
+<!--
+Disclaimer points: Fun! & C# before & Tests!
+-->
 
 ---
 layout: iframe
@@ -119,24 +109,28 @@ url: http://hexlines.simonkarman.com:3000/
 This page is hidden as the iframe takes up the whole page.
 
 ---
-
-<img class="float-right max-w-2/5 ml-5 -m-t-4" alt="Krmx" src="assets/krmx.png" />
-
-# Krmx Implementation
-What is Krmx in its core?
-
-- Server
-- Client
-- Event Emitter
-- Store state at server
-- WebSockets for realtime updates
-
+clicks: 5
 ---
- 
+
 # Krmx Protocol
 Event Emitter at its core.
 
-<img class="max-w-2/3" alt="Krmx" src="assets/krmx-eventemitter.png" />
+<div v-if="$slidev.nav.clicks === 0"><img class="max-w-2/3" alt="Krmx" src="assets/krmx-eventemitter-01.png" /></div>
+<div v-if="$slidev.nav.clicks === 1"><img class="max-w-2/3" alt="Krmx" src="assets/krmx-eventemitter-02.png" /></div>
+<div v-if="$slidev.nav.clicks === 2"><img class="max-w-2/3" alt="Krmx" src="assets/krmx-eventemitter-03.png" /></div>
+<div v-if="$slidev.nav.clicks === 3"><img class="max-w-2/3" alt="Krmx" src="assets/krmx-eventemitter-04.png" /></div>
+<div v-if="$slidev.nav.clicks === 4"><img class="max-w-2/3" alt="Krmx" src="assets/krmx-eventemitter-05.png" /></div>
+<div v-if="$slidev.nav.clicks === 5"><img class="max-w-2/3" alt="Krmx" src="assets/krmx-eventemitter-06.png" /></div>
+
+
+<!--
+- Protocol
+- Event Emitter
+- Client and Server Side
+- Store state at server
+- Keeps track of user sessions
+- WebSockets for realtime updates
+-->
 
 ---
 
@@ -147,7 +141,26 @@ It's all just events
 { type: string, payload: object }
 { type: "user/joined", payload: { username: "simon" } }
 { type: "user/linked", payload: { username: "simon" } }
-{ type: "custom/create-spawned", payload: { class: "dragon", power: 10 } }
+{ type: "my-game/creature-spawned", payload: { class: "dragon", power: 10 } }
+```
+
+---
+
+<img class="float-right max-w-2/5 ml-5 -m-t-4" alt="Krmx" src="assets/krmx.png" />
+
+# Krmx Implementation
+What reference implementation are already available?
+
+- Typescript NodeJS **Server** Reference Implementation
+
+```bash
+npm install @krmx/server
+```
+
+- TypeScript React **Client** Reference Implementation
+ 
+```bash
+npm install @krmx/client
 ```
 
 ---
@@ -170,39 +183,36 @@ This page is hidden as the iframe takes up the whole page.
 # Live Coding!
 Let's build a simple Krmx Server and Client setup.
 
-- Krmx is a Protocol
-- Reference implementation of client and server provided
-- TypeScript
-- React / Redux
+```bash
+npm install @krmx/server
+npm install @krmx/client
+```
+
+Behind the scenes of hexlines!
 
 ---
 
-# Thanks! Questions?
-That's it!
+# Upcoming features
+- State management
+- Latency
+- Officially support Game Middleware
+- Want to help? Go to github.com/simonkarman/krmx
 
-<div class="float-right w-48">
-  <img alt="Simon Karman" src="assets/simonkarman.png" />
-  <p class="text-center">Simon Karman</p>
+---
+
+<div class="flex flex-col items-center float-right w-64">
+  <img class="w-48" alt="Simon Karman" src="assets/simonkarman.png" />
+  <p class="text-center font-bold">Simon Karman</p>
   <p class="text-center">simon.karman@xebia.com</p>
+  <p class="text-center">www.simonkarman.nl</p>
+  <p class="text-center">github.com/simonkarman/krmx</p>
 </div>
 
-<p class="max-w-2/3">
-  If you would like to play hexlines, you can join at: <a target="_blank" href="http://hexlines.simonkarman.com:3000/">http://hexlines.simonkarman.com:3000/</a> (Note: only 6 players can participate, be quick!)
+# Thank you! Questions?
+
+<img class="max-w-2/3" alt="Krmx" src="assets/krmx-eventemitter-05.png" />
+
+<p class="max-w-2/3 text-sm">
+  During the break you can play hexlines at
+  <a target="_blank" href="http://hexlines.simonkarman.com:3000/">http://hexlines.simonkarman.com:3000/</a>
 </p>
-
-
-
----
-
-# Feedback from Dry run
-Upcoming features
-Motivations / Big Lessons (look at other libraries, testing, merge Complexity slides) - Complexity slides: eventual consistency and async
-Krmx Protocol Diagram in steps and flip it
-Show npm install commands
-Mentioned that: Programming is far away from the demo
-Demo of hexlines more at the end
-Behind the scenes of hexlines
-
-Charge Macbook + do not distrub
-Don't make changes before demo
-Timer on table

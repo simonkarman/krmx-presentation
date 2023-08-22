@@ -1,6 +1,7 @@
 "use client";
 import { KrmxProviderWithStore, useKrmx } from '@krmx/client';
 import { useState } from 'react';
+import { MyComponent } from '@/app/client';
 
 // Note: Don't use `KrmxProviderWithStore` if you are already creating a redux store in your app.
 //       In that case, add the exported `krmxSlice` to your store and use `KrmxProvider` directly.
@@ -15,23 +16,4 @@ export default function MyApp() {
       <MyComponent/>
     </KrmxProvider>
   );
-}
-function MyComponent() {
-  const { isConnected, link, isLinked, username, rejectionReason, send } = useKrmx();
-  if (!isConnected) {
-    return <p>You're not connected!</p>
-  }
-
-  if (!isLinked) {
-    return <><button onClick={() => link('simon')}>
-      Join as Simon! - {rejectionReason}
-    </button><button onClick={() => link('tibor')}>
-      Join as Tibor! - {rejectionReason}
-    </button></>;
-  }
-
-  return <>
-    <h1>Welcome, {username}</h1>
-    <button onClick={() => send({ type: 'custom/my-message', payload: {}})}>Send a message</button>
-  </>
 }
