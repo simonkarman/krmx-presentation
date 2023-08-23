@@ -1,7 +1,6 @@
 "use client";
 import { KrmxProviderWithStore, useKrmx } from '@krmx/client';
 import { useState } from 'react';
-import { MyComponent } from '@/app/client';
 
 // Note: Don't use `KrmxProviderWithStore` if you are already creating a redux store in your app.
 //       In that case, add the exported `krmxSlice` to your store and use `KrmxProvider` directly.
@@ -16,4 +15,9 @@ export default function MyApp() {
       <MyComponent/>
     </KrmxProvider>
   );
+}
+
+export function MyComponent() {
+  const {} = useKrmx();
+  return <p>Client</p>;
 }

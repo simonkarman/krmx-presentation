@@ -13,11 +13,19 @@ title: Krmx
 
 Simon Karman (www.simonkarman.nl)
 
+<div class="flex gap-8">
 <div class="w-24">
   <img alt="Simon Karman" src="assets/simonkarman.png" />
 </div>
+<div>
 
-💼 Xebia -- 🕹 Boardgames -- 🌎 Multiplayer
+💼 Xebia Cloud Consultant 
+
+🕹 (Hobbyist) Game Developer
+
+</div>
+</div>
+
 
 <style>
 .slidev-layout.cover h1 {
@@ -37,10 +45,10 @@ I work at Xebia as a Cloud Consultant. In my free time I'm a hobbyist game devel
 
 ---
 
-# Board game
-Let's start at the basis. What is a board game?
+# Let's start at the basics
+What is a board game?
 
-- Table and Players
+- Table and players
 - Players can look at the board state on the table (cards, pieces, dice, ect...)
 - In some games, players have imperfect information of the board state
 - Players can take actions
@@ -48,51 +56,58 @@ Let's start at the basis. What is a board game?
 <img class="max-w-full mt-10" src="assets/boardgame.png" />
 
 ---
-clicks: 8
+clicks: 4
 ---
 
-# Online multiplayer game
-A board game over the internet!
+# A board game over the internet
+Building a framework for an online multiplayer game
 
 <div v-if="$slidev.nav.clicks === 0"><img class="max-w-full mt-10" src="assets/boardgame-multiplayer-0.png" /></div>
 <div v-if="$slidev.nav.clicks === 1"><img class="max-w-full mt-10" src="assets/boardgame-multiplayer-1.png" /></div>
 <div v-if="$slidev.nav.clicks === 2"><img class="max-w-full mt-10" src="assets/boardgame-multiplayer-2.png" /></div>
 <div v-if="$slidev.nav.clicks === 3"><img class="max-w-full mt-10" src="assets/boardgame-multiplayer-3.png" /></div>
-<div v-if="$slidev.nav.clicks >= 4"><img class="max-w-full mt-10" src="assets/boardgame-multiplayer-4.png" /></div>
+<div v-if="$slidev.nav.clicks === 4"><img class="max-w-full mt-10" src="assets/boardgame-multiplayer-4.png" /></div>
 
-<div class="flex gap-8 w-full justify-center">
-  <p v-if="$slidev.nav.clicks >= 5" class="">❌ Co-located System</p>            
-  <p v-if="$slidev.nav.clicks >= 6" class="">❌ Stateless</p> 
-  <p v-if="$slidev.nav.clicks >= 7" class="">❌ Synchronous</p>
-</div>
-<div v-if="$slidev.nav.clicks >= 8" class="-mt-4 text-xl text-center w-full">
-  <b>Conclusion</b>: creating an online multiplayer board game is complex!
-</div>
+---
+
+# What we need
+A system that is ...
+
+<v-clicks class="text-md">
+
+- Distributed ✅ -- An architecture with a server and multiple clients
+- Stateful ✅ -- Keeps track of all state at the server and (partial) state on the client
+- Realtime ✅ -- Informs users in realtime via WebSockets
+- Asynchronous ✅ -- Allows users to interact over time using a persisted session
+
+</v-clicks>
+<v-clicks class="text-md">
+
+**Conclusion**: Creating an online multiplayer board game is complex!
+
+</v-clicks>
 
 ---
 
 <img class="float-right max-w-2/5 ml-5 -m-t-4" alt="Krmx" src="assets/krmx.png" />
 
 # Krmx
-A network protocol for realtime multi-user interactions.
+A network protocol for realtime multi-user interactions
 
 <v-clicks class="text-md">
 
-- Distributed System ✅: A clients and server architecture
-- Stateful ✅: Keeps track of all state at the server and (partial) state on the client
-- Realtime ✅: Informs users in realtime via WebSockets
-- Asynchronous ✅: Allows users to interact over time using a persisted session
-- Easy API ✅: Clear and concise API specification on both client and server side
-- Automated Tests ✅: Test coverage (100%) on 65 different scenarios
+<div class="my-12 text-lg w-full text-center">
+
+🚨 Disclaimer: Krmx is a pet project by me❗
+
+</div>
 
 </v-clicks>
 <v-clicks class="text-md">
 
-<div class="mt-4 text-lg w-full text-center">
-
-🚨 Disclaimer: Krmx is a pet project by me❗ Why?
- 
-</div>
+- Fun 🎉
+- Simple API ✅ -- Clear and concise API specification on both client and server side
+- Automated Tests ✅ -- Test coverage (100%) on 65 different scenarios
 
 </v-clicks>
 
@@ -113,7 +128,7 @@ clicks: 5
 ---
 
 # Krmx Protocol
-Event Emitter at its core.
+A diagram of the Krmx protocol interaction with a client over time
 
 <div v-if="$slidev.nav.clicks === 0"><img class="max-w-2/3" alt="Krmx" src="assets/krmx-eventemitter-01.png" /></div>
 <div v-if="$slidev.nav.clicks === 1"><img class="max-w-2/3" alt="Krmx" src="assets/krmx-eventemitter-02.png" /></div>
@@ -134,13 +149,16 @@ Event Emitter at its core.
 
 ---
 
-# Krmx Protocol - Events
-It's all just events
+# Type & Payload
+The structure of all events in the protocol
 
-```json5 {1|2|3|4|all}
+```json5 {1|3|5|7|all}
 { type: string, payload: object }
+
 { type: "user/joined", payload: { username: "simon" } }
+
 { type: "user/linked", payload: { username: "simon" } }
+
 { type: "my-game/creature-spawned", payload: { class: "dragon", power: 10 } }
 ```
 
@@ -148,27 +166,22 @@ It's all just events
 
 <img class="float-right max-w-2/5 ml-5 -m-t-4" alt="Krmx" src="assets/krmx.png" />
 
-# Krmx Implementation
-What reference implementation are already available?
+# Reference Implementations
+--
 
-- Typescript NodeJS **Server** Reference Implementation
+TypeScript React **Client** Reference Implementation
 
-```bash
-npm install @krmx/server
-```
-
-- TypeScript React **Client** Reference Implementation
- 
 ```bash
 npm install @krmx/client
 ```
 
----
+--
 
-# Customization
-Use middleware to add your own functionality.
+Typescript NodeJS **Server** Reference Implementation
 
-<img class="max-w-2/5" alt="Krmx" src="assets/krmx-middleware.png" />
+```bash
+npm install @krmx/server
+```
 
 ---
 layout: iframe
@@ -181,22 +194,28 @@ This page is hidden as the iframe takes up the whole page.
 ---
 
 # Live Coding!
-Let's build a simple Krmx Server and Client setup.
+Let's build a simple Krmx server and client architecture
 
-```bash
-npm install @krmx/server
-npm install @krmx/client
-```
+<img class="max-w-2/3" alt="Krmx" src="assets/krmx-eventemitter-05.png" />
 
-Behind the scenes of hexlines!
+---
+
+# Customization
+Use middleware to add your own functionality
+
+<img class="max-w-2/5" alt="Krmx" src="assets/krmx-middleware.png" />
 
 ---
 
 # Upcoming features
+
+
 - State management
 - Latency
 - Officially support Game Middleware
-- Want to help? Go to github.com/simonkarman/krmx
+- ... more!
+
+Want to help? Go to **github.com/simonkarman/krmx**
 
 ---
 
