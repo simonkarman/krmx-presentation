@@ -77,8 +77,9 @@ A system that is ...
 
 - Distributed ✅ -- An architecture with a server and multiple clients
 - Stateful ✅ -- Keeps track of all state at the server and (partial) state on the client
-- Realtime ✅ -- Informs users in realtime via WebSockets
-- Asynchronous ✅ -- Allows users to interact over time using a persisted session
+- Realtime ✅ -- Informs users in realtime (via WebSockets)
+- Sessions ✅ -- Allows users to interact over time using a persisted session
+- Event Based ✅ -- An event based system to react to the interactions of the players and notify board state changes
 
 </v-clicks>
 <v-clicks class="text-md">
@@ -128,7 +129,7 @@ clicks: 5
 ---
 
 # Krmx Protocol
-A diagram of the Krmx protocol interaction with a client over time
+A diagram of the Krmx protocol interaction with a client over time and the emitted events
 
 <div v-if="$slidev.nav.clicks === 0"><img class="max-w-2/3" alt="Krmx" src="assets/krmx-eventemitter-01.png" /></div>
 <div v-if="$slidev.nav.clicks === 1"><img class="max-w-2/3" alt="Krmx" src="assets/krmx-eventemitter-02.png" /></div>
@@ -209,10 +210,9 @@ Use middleware to add your own functionality
 
 # Upcoming features
 
-
-- State management
-- Latency
 - Officially support Game Middleware
+- Latency
+- Improve state management
 - ... more!
 
 Want to help? Go to **github.com/simonkarman/krmx**

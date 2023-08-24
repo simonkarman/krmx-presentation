@@ -18,6 +18,23 @@ export default function MyApp() {
 }
 
 export function MyComponent() {
-  const {} = useKrmx();
-  return <p>Client</p>;
+  const { isConnected, link, isLinked, username, rejectionReason, send } = useKrmx();
+
+  if (!isConnected) {
+    return <p>Connection to server failed!</p>;
+  }
+
+  if (!isLinked) {
+    return <>
+      <p>Hello, Amsterdam!</p>
+      <button onClick={() => link('simon')}>Join as Simon</button>
+      <button onClick={() => link('lisa')}>Join as Lisa</button>
+      <p>{rejectionReason}</p>
+    </>;
+  }
+
+  return <>
+    <h1>Welcome, {username}!</h1>
+    <button onClick={() => send({ type: 'my-game/roll', payload: { color: 'red' }})}>Roll a die!</button>
+  </>
 }
