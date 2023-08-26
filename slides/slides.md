@@ -1,5 +1,4 @@
 ---
-theme: ./presentation-templates/slidev-theme-xebia
 highlighter: shiki
 lineNumbers: false
 drawings:
@@ -8,40 +7,42 @@ transition: slide-up
 title: Krmx
 ---
 
-# WebSockets for Turn-Based Multiplayer Games
-24th of August 2023 @ AdvancedJS Meetup
+# Exploring the technology behind online multiplayer board games
+By Simon Karman
 
-Simon Karman (www.simonkarman.nl)
+---
 
-<div class="flex gap-8">
-<div class="w-24">
-  <img alt="Simon Karman" src="assets/simonkarman.png" />
-</div>
+# whoami
+A short introduction about me
+
+<div class="flex justify-between">
 <div>
 
-💼 Xebia Cloud Consultant 
+Simon Karman
 
-🕹 (Hobbyist) Game Developer
+www.simonkarman.nl
 
+--
+
+🇳🇱 I live in The Netherlands
+
+<v-clicks>
+
+☁️ I am a cloud consultant (AWS and GCP)
+
+🕹 I am a (board) game developer
+
+--
+
+❗ Today is not about game design (❌), but about **Game Tech** (✅)
+
+</v-clicks>
+</div>
+
+<div class="w-48">
+  <img alt="Simon Karman" src="assets/simonkarman.png" />
 </div>
 </div>
-
-
-<style>
-.slidev-layout.cover h1 {
-    margin-top: 4rem;
-    max-width: 20rem;
-    font-size: 1.5rem;
-}
-</style>
-
-<!--
-Verify: Clock in sight or timer on table!
-
-Live coding of a simple turn-based game using a TypeScript NodeJS backend and a Typescript React frontend using the krmx library. Krmx is a custom WebSocket protocol specifically build for user-based applications such as turn based games with NodeJS backends and React frontends.
-
-I work at Xebia as a Cloud Consultant. In my free time I'm a hobbyist game developer. I love boardgames and especially making them. Since I was a kid. During covid trying to combine cloud/internet with games. Resulted in some multiplayer games for a group of friends (b11 party) which was 'Mario Party'-ish.
--->
 
 ---
 
@@ -75,11 +76,11 @@ A system that is ...
 
 <v-clicks class="text-md">
 
-- Distributed ✅ -- An architecture with a server and multiple clients
-- Stateful ✅ -- Keeps track of all state at the server and (partial) state on the client
-- Realtime ✅ -- Informs users in realtime (via WebSockets)
-- Sessions ✅ -- Allows users to interact over time using a persisted session
-- Event Based ✅ -- An event based system to react to the interactions of the players and notify board state changes
+- Distributed ✅ -- An architecture with a single server (table) and multiple clients (players)
+- Stateful ✅ -- Keeps track of the board state at the server and (partial) state on the client
+- Realtime ✅ -- Informs users in realtime about change to the board state
+- Session-based ✅ -- Allows users to interact over time using a persisted session
+- Event-based ✅ -- An event based system to react to the interactions of the players and notify board state changes
 
 </v-clicks>
 <v-clicks class="text-md">
@@ -95,26 +96,24 @@ A system that is ...
 # Krmx
 A network protocol for realtime multi-user interactions
 
+<div class="text-md">
+
+- ✅ Distributed, Stateful, Realtime, Session-based, Event-based
+
+</div>
 <v-clicks class="text-md">
 
 <div class="my-12 text-lg w-full text-center">
 
-🚨 Disclaimer: Krmx is a pet project by me❗
+🚨 Disclaimer: Krmx is in active development by me❗
 
 </div>
 
-</v-clicks>
-<v-clicks class="text-md">
+- ✅ Simple API -- Clear and concise API specification on both client and server side
 
-- Fun 🎉
-- Simple API ✅ -- Clear and concise API specification on both client and server side
-- Automated Tests ✅ -- Test coverage (100%) on 65 different scenarios
+- ✅ Automated Tests -- Test coverage (100%) on 65 different scenarios
 
 </v-clicks>
-
-<!--
-Disclaimer points: Fun! & C# before & Tests!
--->
 
 ---
 layout: iframe
@@ -129,7 +128,7 @@ clicks: 5
 ---
 
 # Krmx Protocol
-A diagram of the Krmx protocol interaction with a client over time and the emitted events
+A diagram of the Krmx protocol interaction between a client and server over time, showcasing the emitted events
 
 <div v-if="$slidev.nav.clicks === 0"><img class="max-w-2/3" alt="Krmx" src="assets/krmx-eventemitter-01.png" /></div>
 <div v-if="$slidev.nav.clicks === 1"><img class="max-w-2/3" alt="Krmx" src="assets/krmx-eventemitter-02.png" /></div>
@@ -138,20 +137,10 @@ A diagram of the Krmx protocol interaction with a client over time and the emitt
 <div v-if="$slidev.nav.clicks === 4"><img class="max-w-2/3" alt="Krmx" src="assets/krmx-eventemitter-05.png" /></div>
 <div v-if="$slidev.nav.clicks === 5"><img class="max-w-2/3" alt="Krmx" src="assets/krmx-eventemitter-06.png" /></div>
 
-
-<!--
-- Protocol
-- Event Emitter
-- Client and Server Side
-- Store state at server
-- Keeps track of user sessions
-- WebSockets for realtime updates
--->
-
 ---
 
 # Type & Payload
-The structure of all events in the protocol
+The structure of events in the Krmx protocol
 
 ```json5 {1|3|5|7|all}
 { type: string, payload: object }
@@ -211,8 +200,11 @@ Use middleware to add your own functionality
 # Upcoming features
 
 - Officially support Game Middleware
-- Latency
 - Improve state management
+- Reusable Client and Server TypeScript types
+- Framework Agnostic Client Implementation
+- Match Making
+- Latency
 - ... more!
 
 Want to help? Go to **github.com/simonkarman/krmx**
@@ -232,6 +224,6 @@ Want to help? Go to **github.com/simonkarman/krmx**
 <img class="max-w-2/3" alt="Krmx" src="assets/krmx-eventemitter-05.png" />
 
 <p class="max-w-2/3 text-sm">
-  During the break you can play hexlines at
+  Feel free to play hexlines at
   <a target="_blank" href="http://hexlines.simonkarman.com:3000/">http://hexlines.simonkarman.com:3000/</a>
 </p>

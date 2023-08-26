@@ -1,5 +1,5 @@
 {
-  "name": "amk-slides",
+  "name": "slides",
   "private": true,
   "scripts": {
     "build": "slidev build",
